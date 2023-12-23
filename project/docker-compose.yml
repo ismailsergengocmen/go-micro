@@ -1,0 +1,18 @@
+version: '3' # Docker version
+
+services: # Section to define services which compose the application
+
+  broker-service:
+    build:
+      # Directory containing the Dockerfile and any files needed for the build
+      context: ./../broker-service
+      # The path to the Dockerfile within the build context
+      dockerfile: ./../broker-service/broker-service.dockerfile
+    # If the service stops or encounters an error, Docker Compose will attempt to restart it
+    restart: always
+    ports:
+      - "8080:80"
+    deploy:
+      # Indicates that the service should run in replicated mode, meaning you can specify the number of replicas
+      mode: replicated
+      replicas: 1
